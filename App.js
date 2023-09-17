@@ -1,13 +1,13 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Provider } from "react-redux";
-import { store, persistor } from './redux/store';
+import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { ListOfProducts } from "./screens/mainScreen/ListOfProducts";
@@ -26,29 +26,42 @@ export default function App() {
   const MainStack = createStackNavigator();
 
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <NavigationContainer>
-          <MainStack.Navigator initialRouteName="ListOfProducts">
-            <MainStack.Screen
-              name="ListOfProducts"
-              component={ListOfProducts}
-              options={{ title: "Список Товарів" }}
+    // <Provider store={store}>
+    // <PersistGate persistor={persistor}>
+    <NavigationContainer>
+      <MainStack.Navigator initialRouteName="ListOfProducts">
+        <MainStack.Screen
+          name="ListOfProducts"
+          component={ListOfProducts}
+          options={{
+            title: "Список Товарів",
+            headerTintColor: "#FF6C00",
+            headerRight: ()=>{
+              <Button
+              onPress={() => navigation.navigate("ProductAdd")}
+              title="+"
+              color= "#FF6C00"
             />
-            <MainStack.Screen
-              name="ProductDetails"
-              component={ProductDetails}
-              options={{ title: "Перегляд деталей товару" }}
-            />
-            <MainStack.Screen
-              name="ProductAdd"
-              component={ProductAdd}
-              options={{ title: "Додати товар" }}
-            />
-          </MainStack.Navigator>
-          </NavigationContainer>
-      </PersistGate>
-    </Provider>
+            }
+          }}
+        />
+        <MainStack.Screen
+          name="ProductDetails"
+          component={ProductDetails}
+          options={{
+            title: "Перегляд деталей товару",
+            headerTintColor: "#FF6C00",
+          }}
+        />
+        <MainStack.Screen
+          name="ProductAdd"
+          component={ProductAdd}
+          options={{ title: "Додати товар", headerTintColor: "#FF6C00" }}
+        />
+      </MainStack.Navigator>
+    </NavigationContainer>
+    // </PersistGate>
+    // </Provider>
   );
 }
 

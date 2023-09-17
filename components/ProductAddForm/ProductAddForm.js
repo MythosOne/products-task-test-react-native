@@ -13,38 +13,38 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import { addProduct } from "../../redux/operations";
 import { getProducts } from "../../redux/selectors";
 
 export const ProductAddForm = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
-  const dispatch = useDispatch();
-  const products = useSelector(getProducts);
+  // const dispatch = useDispatch();
+  // const products = useSelector(getProducts);
 
-  const handleSubmit = ({ title, price, description }, { resetForm }) => {
-    const loweredCase = title.toLowerCase().trim();
-    const searchProduct = products.some(
-      (product) => product.title.toLowerCase().trim() === loweredCase
-    );
+  // const handleSubmit = ({ title, price, description }, { resetForm }) => {
+  //   const loweredCase = title.toLowerCase().trim();
+  //   const searchProduct = products.some(
+  //     (product) => product.title.toLowerCase().trim() === loweredCase
+  //   );
 
-    if (searchProduct) {
-      alert(`${title} is already in products list`);
-    } else if (title.length === 0) {
-      alert("Fields must be filled!");
-    } else {
-      dispatch(
-        addProduct({
-          title,
-          price,
-          description,
-        })
-      );
-    }
-    resetForm();
-  };
+  //   if (searchProduct) {
+  //     alert(`${title} is already in products list`);
+  //   } else if (title.length === 0) {
+  //     alert("Fields must be filled!");
+  //   } else {
+  //     dispatch(
+  //       addProduct({
+  //         title,
+  //         price,
+  //         description,
+  //       })
+  //     );
+  //   }
+  //   resetForm();
+  // };
 
   return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -55,8 +55,8 @@ export const ProductAddForm = () => {
           price: "",
           description: "",
         }}
-        // onSubmit={(values) => console.log(values)}
-        onSubmit={handleSubmit}
+        onSubmit={(values) => console.log(values)}
+        // onSubmit={handleSubmit}
       >
         {({ handleChange, handleSubmit, handleBlur, values }) => (
           <View>

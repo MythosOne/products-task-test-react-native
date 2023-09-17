@@ -2,9 +2,8 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-
 export const ProductCard = ({ image, title, price, description }) => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -14,10 +13,10 @@ export const ProductCard = ({ image, title, price, description }) => {
         }
       >
         <View style={styles.item}>
-          <Image source={ {uri: image}} style={{ width: 200, height: 200 }} />
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
           <View>
-            <Text style={styles.title}>Title: {title}</Text>
-            <Text style={styles.price}>Price: {price}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.price}>Price: {price}$</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -28,34 +27,39 @@ export const ProductCard = ({ image, title, price, description }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
     alignItems: "center",
     justifyContent: "center",
   },
   item: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
 
-    width: 300,
+    // minWidth: "100%",
+    minWidth: 340,
     // height: 140,
     backgroundColor: "white",
 
-    borderColor: "#eee",
+    borderColor: "#FF6C00",
     borderRadius: 14,
     borderWidth: 1,
 
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 5,
+    marginHorizontal: 10,
   },
   title: {
+    marginTop: 10,
+    color: "#767676",
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 22,
   },
   price: {
+    marginTop: 10,
+    color: "#FF6C00",
     textAlign: "center",
-    fontSize: 32,
+    fontSize: 24,
   },
   description: {
     textAlign: "center",
