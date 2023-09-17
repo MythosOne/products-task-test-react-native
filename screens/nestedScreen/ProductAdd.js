@@ -1,13 +1,20 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+  StatusBar
+} from "react-native";
 import { ProductAddForm } from "../../components/ProductAddForm/ProductAddForm";
-// import { Formik } from "formik";
 
 export const ProductAdd = () => {
   return (
-    <View style={styles.container}>
-      <ProductAddForm />
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ProductAddForm />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
