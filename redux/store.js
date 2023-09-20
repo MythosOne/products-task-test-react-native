@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { productsReducer} from './productsSlice'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const middleware = [
   ...getDefaultMiddleware({

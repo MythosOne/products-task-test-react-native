@@ -17,34 +17,37 @@ import { useNavigation } from "@react-navigation/native";
 
 import { addProduct } from "../../redux/operations";
 import { getProducts } from "../../redux/selectors";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ProductAddForm = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(getProducts);
   const navigation = useNavigation();
 
-  // const dispatch = useDispatch();
   // const products = useSelector(getProducts);
 
-  // const handleSubmit = ({ title, price, description }, { resetForm }) => {
-  //   const loweredCase = title.toLowerCase().trim();
-  //   const searchProduct = products.some(
-  //     (product) => product.title.toLowerCase().trim() === loweredCase
-  //   );
+  const handleSubmit = ({ title, price, description }, { resetForm }) => {
+    const loweredCase = title.toLowerCase().trim();
+    const searchProduct = products.some(
+      (product) => product.title.toLowerCase().trim() === loweredCase
+    );
 
-  //   if (searchProduct) {
-  //     alert(`${title} is already in products list`);
-  //   } else if (title.length === 0) {
-  //     alert("Fields must be filled!");
-  //   } else {
-  //     dispatch(
-  //       addProduct({
-  //         title,
-  //         price,
-  //         description,
-  //       })
-  //     );
-  //   }
-  //   resetForm();
-  // };
+    if (searchProduct) {
+      alert(`${title} is already in products list`);
+    } else if (title.length === 0) {
+      alert("Fields must be filled!");
+    } else {
+      dispatch(
+        addProduct({
+          title,
+          price,
+          description,
+        })
+      );
+      alert("Product added!");
+    }
+    resetForm();
+  };
 
   return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -55,8 +58,8 @@ export const ProductAddForm = () => {
           price: "",
           description: "",
         }}
-        onSubmit={(values) => console.log(values)}
-        // onSubmit={handleSubmit}
+        // onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
       >
         {({ handleChange, handleSubmit, handleBlur, values }) => (
           <View>
@@ -107,14 +110,14 @@ export const ProductAddForm = () => {
 
 const styles = StyleSheet.create({
   form: {
-    // flex: 1,
+    flex: 1,
     width: "100%",
     height: "100%",
     // alignItems: "center",
     // justifyContent: "center",
     padding: 10,
     elevation: 10,
-    backgroundColor: "#e6e6e6",
+    backgroundColor: "#FFF",
   },
   textInput: {
     height: 40,
@@ -139,23 +142,32 @@ const styles = StyleSheet.create({
     // alignItems: "center",
 
     backgroundColor: "#FF6C00",
-    width: 150,
+    width: 260,
     height: 51,
-    padding: 16,
+    padding: 12,
 
     borderColor: "#FFFFFF",
     borderWidth: 2,
     borderRadius: 100,
   },
   buttonText: {
-    height: 19,
+    // height: 19,
 
     fontFamily: "Roboto",
     fontStyle: "normal",
     fontWeight: "400",
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 19,
     textAlign: "center",
     color: "#FFFFFF",
   },
+  // textInput: {
+  //   width: "78%",
+  //   fontFamily: "Roboto",
+  //   fontStyle: "normal",
+  //   fontWeight: "400",
+  //   fontSize: 16,
+  //   lineHeight: 19,
+  //   color: "#212121",
+  // },
 });

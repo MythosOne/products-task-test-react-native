@@ -32,11 +32,6 @@ export const productsSlice = createSlice({
       });
   },
 
-  reducers: {
-    // setFilter(state, action) {
-    //   state.filter = action.payload;
-    // },
-  },
 });
 
 export const productsReducer = productsSlice.reducer;
