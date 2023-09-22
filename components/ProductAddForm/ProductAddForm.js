@@ -19,6 +19,9 @@ import { addProduct } from "../../redux/operations";
 import { getProducts } from "../../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 
+// import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
+
 export const ProductAddForm = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
@@ -49,10 +52,24 @@ export const ProductAddForm = () => {
     resetForm();
   };
 
+  const formValidationSchema = Yup.object().shape({
+    title: Yup
+      .string()
+      .min(2, "Занадто коротке")
+      .required("Заповніть будь ласка"),
+      price: Yup
+      .number()
+      .required("Заповніть будь ласка"),
+      description: Yup
+      .string()
+      .max(200, "Повинно бути не більше 200 символів"),
+  });
+
   return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <ScrollView style={styles.form}>
+    // <ScrollView style={styles.form}>
       <Formik
+        validationSchema={formValidationSchema}
         initialValues={{
           title: "",
           price: "",
@@ -62,11 +79,12 @@ export const ProductAddForm = () => {
         onSubmit={handleSubmit}
       >
         {({ handleChange, handleSubmit, handleBlur, values }) => (
-          <View>
+          <View style={styles.form}>
             <KeyboardAvoidingView
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <TextInput
+                // name="productName"
                 onChangeText={handleChange("title")}
                 onBlur={handleBlur("title")}
                 value={values.title}
@@ -74,6 +92,7 @@ export const ProductAddForm = () => {
                 style={styles.textInput}
               />
               <TextInput
+                // name="productPrice"
                 onChangeText={handleChange("price")}
                 onBlur={handleBlur("price")}
                 value={values.price}
@@ -81,6 +100,7 @@ export const ProductAddForm = () => {
                 style={styles.textInput}
               />
               <TextInput
+                // name="productDescription"
                 onChangeText={handleChange("description")}
                 onBlur={handleBlur("description")}
                 value={values.description}
@@ -103,7 +123,7 @@ export const ProductAddForm = () => {
           </View>
         )}
       </Formik>
-    </ScrollView>
+    // </ScrollView>
     // </TouchableWithoutFeedback>
   );
 };

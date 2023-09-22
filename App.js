@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { Button, TouchableOpacity } from "react-native";
+import { Button, TouchableOpacity, Text } from "react-native";
 import * as Icon from "react-native-feather";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -43,30 +43,30 @@ export default function App() {
 
   return (
     <Provider store={store}>
-    {/* <PersistGate persistor={persistor}> */}
-    <NavigationContainer>
-      <MainStack.Navigator initialRouteName="ListOfProducts">
-        <MainStack.Screen
-          name="ListOfProducts"
-          component={ListOfProducts}
-          options={headerOptions}
-        />
-        <MainStack.Screen
-          name="ProductDetails"
-          component={ProductDetails}
-          options={{
-            title: "Перегляд деталей товару",
-            headerTintColor: "#FF6C00",
-          }}
-        />
-        <MainStack.Screen
-          name="ProductAdd"
-          component={ProductAdd}
-          options={{ title: "Додати товар", headerTintColor: "#FF6C00" }}
-        />
-      </MainStack.Navigator>
-    </NavigationContainer>
-    {/* </PersistGate> */}
+      <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+        <NavigationContainer>
+          <MainStack.Navigator initialRouteName="ListOfProducts">
+            <MainStack.Screen
+              name="ListOfProducts"
+              component={ListOfProducts}
+              options={headerOptions}
+            />
+            <MainStack.Screen
+              name="ProductDetails"
+              component={ProductDetails}
+              options={{
+                title: "Перегляд деталей товару",
+                headerTintColor: "#FF6C00",
+              }}
+            />
+            <MainStack.Screen
+              name="ProductAdd"
+              component={ProductAdd}
+              options={{ title: "Додати товар", headerTintColor: "#FF6C00" }}
+            />
+          </MainStack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }

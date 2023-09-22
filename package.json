@@ -9,15 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.10",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "expo": "~49.0.10",
+    "expo-crypto": "~12.4.1",
     "expo-font": "~11.4.0",
     "expo-status-bar": "~1.6.0",
     "formik": "^2.4.4",
