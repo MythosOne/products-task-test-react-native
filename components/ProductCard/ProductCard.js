@@ -6,40 +6,40 @@ export const ProductCard = ({ image, title, price, description }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("ProductDetails", { image, title, price })
-        }
-      >
-        <View style={styles.item}>
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-          <View>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>Price: {price}$</Text>
-          </View>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("ProductDetails", { image, title, price })
+      }
+    >
+      <View style={styles.item}>
+        <Image source={{ uri: image }} style={{ width: 280, height: 240 }} />
+        <View>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.price}>Price: {price}$</Text>
         </View>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: "#f5f5f5",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
   item: {
-    // flex: 1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    pointerEvents: "none",
+    elevation: 5,
 
-    // minWidth: "100%",
-    minWidth: 340,
+    // maxWidth: "90%",
+    // minWidth: 340,
     // height: 140,
-    backgroundColor: "white",
+    backgroundColor: "#fff",
 
     borderColor: "#FF6C00",
     borderRadius: 14,

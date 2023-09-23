@@ -24,19 +24,19 @@ export default function App() {
     return null;
   }
 
-  const headerOptions = {
-    title: "Список Товарів",
-    headerTintColor: "#FF6C00",
-    headerRight: () => (
-      <TouchableOpacity
-        onPress={() => alert("ListOfProducts")}
-        // onPress={() => navigation.navigate("ProductAdd")}
-        style={{ marginRight: 20 }}
-      >
-        <Icon.Plus width={28} height={28} color="#FF6C00" />
-      </TouchableOpacity>
-    ),
-  };
+  // const headerOptions = {
+  //   title: "Список Товарів",
+  //   headerTintColor: "#FF6C00",
+  //   headerRight: () => (
+  //     <TouchableOpacity
+  //       // onPress={() => alert("ListOfProducts")}
+  //       onPress={() => navigation.navigate("ProductAdd")}
+  //       style={{ marginRight: 20 }}
+  //     >
+  //       <Icon.Plus width={28} height={28} color="#FF6C00" />
+  //     </TouchableOpacity>
+  //   ),
+  // };
 
   const MainStack = createStackNavigator();
   // const navigation = useNavigation();
@@ -49,7 +49,22 @@ export default function App() {
             <MainStack.Screen
               name="ListOfProducts"
               component={ListOfProducts}
-              options={headerOptions}
+              options={{
+                title: "Список Товарів",
+                headerTintColor: "#FF6C00",
+                headerTitleStyle: {
+                  marginRight: 109,
+                },
+                // headerRight: () => (
+                //   <TouchableOpacity
+                //     onPress={() => alert("ListOfProducts")}
+                //     // onPress={() => navigation.navigate("ProductAdd")}
+                //     style={{ marginRight: 20 }}
+                //   >
+                //     <Icon.Plus width={28} height={28} color="#FF6C00" />
+                //   </TouchableOpacity>
+                // ),
+              }}
             />
             <MainStack.Screen
               name="ProductDetails"

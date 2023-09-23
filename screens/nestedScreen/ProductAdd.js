@@ -9,6 +9,7 @@ import {
 import { ProductAddForm } from "../../components/ProductAddForm/ProductAddForm";
 
 export const ProductAdd = () => {
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>

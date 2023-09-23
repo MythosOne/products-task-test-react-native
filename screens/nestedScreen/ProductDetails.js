@@ -11,7 +11,7 @@ export const ProductDetails = () => {
   return (
     <View style={styles.container}>
       <View style={styles.image}>
-        <Image source={{ uri: image }} style={{ width: 360, height: 340 }} />
+        <Image source={{ uri: image }} style={{ width: 340, height: 340 }} />
       </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.price}>Price $: {price}</Text>
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     borderColor: "#FF6C00",
+    backgroundSize: 'cover',  
   },
   title:{
     marginTop: 10,

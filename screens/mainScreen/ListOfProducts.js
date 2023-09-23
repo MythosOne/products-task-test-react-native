@@ -13,10 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 // import { apiService } from "../../components/Api/apiService";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../redux/selectors';
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/selectors";
 
-export const ListOfProducts = () => {
+export const ListOfProducts = React.memo(() => {
   const navigation = useNavigation();
 
   const products = useSelector(getProducts);
@@ -33,26 +33,27 @@ export const ListOfProducts = () => {
   //     .finally(() => console.log("ok"));
   // }, []);
 
+  console.log(products);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Button
+      <TouchableOpacity
         title="Додати товар"
+        style={styles.button}
         onPress={() => navigation.navigate("ProductAdd")}
-      />
+      >
+        <Text style={styles.buttonText}> Додати товар</Text>
+      </TouchableOpacity>
       <FlatList
         data={products}
         renderItem={({ item }) => (
-          <ProductCard
-            title={item.title}
-            image={item.image}
-            price={item.price}
-          />
+          <ProductCard title={item.id} image={item.image} price={item.price} />
         )}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -63,5 +64,29 @@ const styles = StyleSheet.create({
 
     width: "100%",
     height: "100%",
+  },
+  button: {
+    alignSelf: "center",
+    marginTop: 10,
+    marginBottom: 10,
+
+    backgroundColor: "#FF6C00",
+    width: 200,
+    height: 51,
+    padding: 12,
+
+    borderColor: "#FFFFFF",
+    borderWidth: 2,
+    borderRadius: 100,
+    elevation: 10,
+  },
+  buttonText: {
+    fontFamily: "Roboto",
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: 20,
+    lineHeight: 19,
+    textAlign: "center",
+    color: "#FFFFFF",
   },
 });
