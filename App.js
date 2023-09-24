@@ -55,15 +55,6 @@ export default function App() {
                 headerTitleStyle: {
                   marginRight: 109,
                 },
-                // headerRight: () => (
-                //   <TouchableOpacity
-                //     onPress={() => alert("ListOfProducts")}
-                //     // onPress={() => navigation.navigate("ProductAdd")}
-                //     style={{ marginRight: 20 }}
-                //   >
-                //     <Icon.Plus width={28} height={28} color="#FF6C00" />
-                //   </TouchableOpacity>
-                // ),
               }}
             />
             <MainStack.Screen
@@ -77,7 +68,10 @@ export default function App() {
             <MainStack.Screen
               name="ProductAdd"
               component={ProductAdd}
-              options={{ title: "Додати товар", headerTintColor: "#FF6C00" }}
+              options={{
+                title: "Додати товар",
+                headerTintColor: "#FF6C00"
+              }}
             />
           </MainStack.Navigator>
         </NavigationContainer>

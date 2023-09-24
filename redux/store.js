@@ -1,4 +1,5 @@
-// import { configureStore } from "@reduxjs/toolkit";
+// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// import storage from 'redux-persist/lib/storage';
 // import {
 //   persistStore,
 //   persistReducer,
@@ -8,36 +9,36 @@
 //   PERSIST,
 //   PURGE,
 //   REGISTER,
-// } from "redux-persist";
-// import { productsReducer } from "./productsSlice";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+// } from 'redux-persist';
+// import { productsReducer} from './productsSlice'
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// const middleware = [
+//   ...getDefaultMiddleware({
+//     serializableCheck: {
+//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     },
+//   }),
+// ];
 
 // const persistConfig = {
 //   key: "products",
 //   storage: AsyncStorage,
 // };
 
-// const reducer = persistReducer(persistConfig, productsReducer);
-
 // export const store = configureStore({
-//   reducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-//   devTools: process.env.NODE_ENV === "development",
+//   reducer: {
+//     products: persistReducer(persistConfig, productsReducer)
+//   },
+//   middleware,
+//   devTools: process.env.NODE_ENV === 'development',
 // });
 
 // export const persistor = persistStore(store);
 
-// export default { store, persistor };
-
-
-
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { productsReducer } from './productsSlice';
 import {
   persistStore,
   persistReducer,
@@ -48,29 +49,26 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { productsReducer} from './productsSlice'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-];
+const rootReducer = combineReducers({
+  products: productsReducer,
+});
 
 const persistConfig = {
-  key: "products",
+  key: 'root',
   storage: AsyncStorage,
 };
 
+const persistedProductsReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    products: persistReducer(persistConfig, productsReducer)
-  },
-  middleware,
-  devTools: process.env.NODE_ENV === 'development',
+  reducer: persistedProductsReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export const ProductCard = ({ image, title, price, description }) => {
   const navigation = useNavigation();
@@ -8,11 +8,17 @@ export const ProductCard = ({ image, title, price, description }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("ProductDetails", { image, title, price })
+        navigation.navigate('ProductDetails', { image, title, price, description})
       }
     >
       <View style={styles.item}>
-        <Image source={{ uri: image }} style={{ width: 280, height: 240 }} />
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: 280,
+            height: 240,
+          }}
+        />
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.price}>Price: {price}$</Text>
@@ -23,25 +29,19 @@ export const ProductCard = ({ image, title, price, description }) => {
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#f5f5f5",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
   item: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    pointerEvents: "none",
-    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+    // elevation: 5,
 
     // maxWidth: "90%",
     // minWidth: 340,
     // height: 140,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
 
-    borderColor: "#FF6C00",
+    borderColor: '#FF6C00',
     borderRadius: 14,
     borderWidth: 1,
 
@@ -51,18 +51,18 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 10,
-    color: "#767676",
-    textAlign: "center",
+    color: '#767676',
+    textAlign: 'center',
     fontSize: 22,
   },
   price: {
     marginTop: 10,
-    color: "#FF6C00",
-    textAlign: "center",
+    color: '#FF6C00',
+    textAlign: 'center',
     fontSize: 24,
   },
   description: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 18,
   },
 });

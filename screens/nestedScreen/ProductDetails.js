@@ -6,7 +6,6 @@ export const ProductDetails = () => {
   const {
     params: { image, title, price, description },
   } = useRoute();
-  console.log(price, description);
 
   return (
     <View style={styles.container}>
@@ -49,6 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   description: {
+    width: "90%",
     marginTop: 10,
     textAlign: "center",
     color: "#767676",
