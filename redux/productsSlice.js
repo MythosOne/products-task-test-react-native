@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { fetchProducts, addProduct } from './operations';
+// import axios from "axios";
 
 const productsinitialState = [
   {

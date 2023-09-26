@@ -15,6 +15,8 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { useSelector } from 'react-redux';
 import { getProducts } from '../../redux/selectors';
 
+import * as Icon from 'react-native-feather';
+
 export const ListOfProducts = React.memo(() => {
   const navigation = useNavigation();
 
@@ -24,13 +26,13 @@ export const ListOfProducts = React.memo(() => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         title="Додати товар"
         style={styles.button}
         onPress={() => navigation.navigate('ProductAdd')}
       >
         <Text style={styles.buttonText}> Додати товар</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <FlatList
         data={products}
         renderItem={({ item }) => (
@@ -43,6 +45,16 @@ export const ListOfProducts = React.memo(() => {
         )}
         keyExtractor={item => item.id}
       />
+      {/* <View style={{position: "absolute",}}> */}
+      <TouchableOpacity
+        title="Додати товар"
+        style={styles.button}
+        onPress={() => navigation.navigate('ProductAdd')}
+      >
+        {/* <Text style={styles.buttonText}> Додати товар</Text> */}
+        <Icon.Plus width={32} height={32} color="#FFF" />
+      </TouchableOpacity>
+      {/* </View> */}
     </SafeAreaView>
   );
 });
@@ -58,18 +70,22 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   button: {
+    position: 'absolute',
     alignSelf: 'center',
+    bottom: 20,
+    right: 20,
     marginTop: 10,
     marginBottom: 10,
+    padding: 0,
 
     backgroundColor: '#FF6C00',
-    width: 200,
-    height: 51,
-    padding: 12,
+
+    padding: 10,
+    margin: 0,
 
     borderColor: '#FFFFFF',
     borderWidth: 2,
-    borderRadius: 100,
+    borderRadius: 50,
     elevation: 10,
   },
   buttonText: {

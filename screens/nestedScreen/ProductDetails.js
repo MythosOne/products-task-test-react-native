@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import React from 'react';
+import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
 export const ProductDetails = () => {
   const {
@@ -14,7 +14,19 @@ export const ProductDetails = () => {
       </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.price}>Price $: {price}</Text>
-      <Text style={styles.description}>Product description: {description}</Text>
+      <ScrollView
+        style={{ width: '100%'}}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'center',
+          // flexDirection: 'column',
+          padding: 10
+        }}
+      >
+        <Text style={styles.description}>
+          Product description: {description}
+        </Text>
+      </ScrollView>
     </View>
   );
 };
@@ -22,36 +34,36 @@ export const ProductDetails = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "start",
+    alignItems: 'center',
+    justifyContent: 'start',
 
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   image: {
     marginTop: 20,
 
     borderWidth: 1,
     borderRadius: 6,
-    borderColor: "#FF6C00",
-    backgroundSize: 'cover',  
+    borderColor: '#FF6C00',
+    backgroundSize: 'cover',
   },
-  title:{
+  title: {
     marginTop: 10,
-    color: "#767676",
-    textAlign: "center",
+    color: '#767676',
+    textAlign: 'center',
     fontSize: 22,
   },
   price: {
     marginTop: 10,
-    color: "#FF6C00",
-    textAlign: "center",
+    color: '#FF6C00',
+    textAlign: 'center',
     fontSize: 24,
   },
   description: {
-    width: "90%",
+    width: '90%',
     marginTop: 10,
-    textAlign: "center",
-    color: "#767676",
+    textAlign: 'center',
+    color: '#767676',
     fontSize: 18,
   },
 });

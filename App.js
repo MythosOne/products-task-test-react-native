@@ -1,10 +1,10 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { Button, TouchableOpacity, Text } from "react-native";
+import { Text } from "react-native";
 import * as Icon from "react-native-feather";
 
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Provider } from "react-redux";
@@ -24,22 +24,7 @@ export default function App() {
     return null;
   }
 
-  // const headerOptions = {
-  //   title: "Список Товарів",
-  //   headerTintColor: "#FF6C00",
-  //   headerRight: () => (
-  //     <TouchableOpacity
-  //       // onPress={() => alert("ListOfProducts")}
-  //       onPress={() => navigation.navigate("ProductAdd")}
-  //       style={{ marginRight: 20 }}
-  //     >
-  //       <Icon.Plus width={28} height={28} color="#FF6C00" />
-  //     </TouchableOpacity>
-  //   ),
-  // };
-
   const MainStack = createStackNavigator();
-  // const navigation = useNavigation();
 
   return (
     <Provider store={store}>
@@ -79,12 +64,3 @@ export default function App() {
     </Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });

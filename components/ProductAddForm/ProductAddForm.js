@@ -15,7 +15,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 
-// import { addProduct } from "../../redux/operations";
+import { addProduct } from "../../redux/operations";
 import { getProducts } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -55,6 +55,16 @@ export const ProductAddForm = () => {
 
   console.log(products);
 
+  const productValidationSchema = Yup.object().shape({
+    title: Yup.string()
+      .required('Заповніть будь ласка')
+      .min(2, 'Занадто коротке'),
+    price: Yup.number().positive().required('Заповніть будь ласка'),
+    description: Yup.string()
+      .required('Заповніть будь ласка')
+      .max(200, ({ max }) => `Повинно бути не більше ${max} символів`),
+  });
+
   return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <ScrollView style={styles.container}>
@@ -64,44 +74,37 @@ export const ProductAddForm = () => {
           price: '',
           description: '',
         }}
-        validationSchema={Yup.object({
-          title: Yup
-            .string()
-            .min(2, 'Занадто коротке')
-            .required('Заповніть будь ласка'),
-          price: Yup
-            .number()
-            .required("Заповніть будь ласка"),
-          description: Yup
-          .string()
-          .max(200, "Повинно бути не більше 200 символів"),
-        })}
+        validationSchema={productValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ handleChange, handleSubmit, values }) => (
+        {({ handleChange, handleSubmit, values, errors }) => (
           <View style={styles.form}>
             <KeyboardAvoidingView
               behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
             >
+              <View>
+                <TextInput
+                  name="title"
+                  onChangeText={handleChange('title')}
+                  value={values.title}
+                  placeholder="Назва товару"
+                  style={
+                    isInputFocused.input1
+                      ? styles.inputOnFocus
+                      : styles.inputOnBlur
+                  }
+                  onFocus={prev => {
+                    setFocus({ ...prev, input1: true });
+                  }}
+                  onBlur={prev => {
+                    setFocus({ ...prev, input1: false });
+                  }}
+                />
+                {errors.title &&(<Text style={styles.errorTxt}>{errors.title}</Text>)}
+              </View>
+              <View>
               <TextInput
-                // name="productName"
-                onChangeText={handleChange('title')}
-                value={values.title}
-                placeholder="Назва товару"
-                style={
-                  isInputFocused.input1
-                    ? styles.inputOnFocus
-                    : styles.inputOnBlur
-                }
-                onFocus={prev => {
-                  setFocus({ ...prev, input1: true });
-                }}
-                onBlur={prev => {
-                  setFocus({ ...prev, input1: false });
-                }}
-              />
-              <TextInput
-                // name="productPrice"
+                name="price"
                 onChangeText={handleChange('price')}
                 value={values.price}
                 placeholder="Ціна товару"
@@ -117,8 +120,11 @@ export const ProductAddForm = () => {
                   setFocus({ ...prev, input2: false });
                 }}
               />
+              {errors.price &&(<Text style={styles.errorTxt}>{errors.price}</Text>)}
+              </View>
+              <View>
               <TextInput
-                // name="productDescription"
+                name="description"
                 editable
                 multiline
                 maxLength={200}
@@ -137,13 +143,12 @@ export const ProductAddForm = () => {
                   setFocus({ ...prev, input3: false });
                 }}
               />
+              {errors.description &&(<Text style={styles.errorTxt}>{errors.description}</Text>)}
+              </View>
             </KeyboardAvoidingView>
             <TouchableOpacity
               style={styles.button}
-              onPress={
-                // ()=> navigation.navigate("ListOfProducts");
-                handleSubmit
-              }
+              onPress={handleSubmit}
               title="Додати товар"
             >
               <Text style={styles.buttonText}> Додати товар</Text>
@@ -163,32 +168,12 @@ const styles = StyleSheet.create({
     // height: "100%",
     backgroundColor: '#FFF',
   },
-  button: {
-    alignSelf: 'center',
-    // alignItems: "center",
-
-    backgroundColor: '#FF6C00',
-    width: 200,
-    height: 51,
-    padding: 12,
-    marginTop: 20,
-    marginBottom: 20,
-
-    borderColor: '#FFFFFF',
-    borderWidth: 2,
-    borderRadius: 100,
-    elevation: 10,
+  errorTxt:{
+    fontSize: 14,
+    color:"red",
+    marginTop: 5,
+    marginLeft: 20,
   },
-  buttonText: {
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '400',
-    fontSize: 18,
-    lineHeight: 19,
-    textAlign: 'center',
-    color: '#FFFFFF',
-  },
-
   inputOnBlur: {
     flexDirection: 'row',
     alignSelf: 'center',
@@ -272,5 +257,30 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 19,
     color: '#212121',
+  },
+  button: {
+    alignSelf: 'center',
+    // alignItems: "center",
+
+    backgroundColor: '#FF6C00',
+    width: 200,
+    height: 51,
+    padding: 12,
+    marginTop: 20,
+    marginBottom: 20,
+
+    borderColor: '#FFFFFF',
+    borderWidth: 2,
+    borderRadius: 100,
+    elevation: 10,
+  },
+  buttonText: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 18,
+    lineHeight: 19,
+    textAlign: 'center',
+    color: '#FFFFFF',
   },
 });
