@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
-import { addProduct } from "../../redux/operations";
+// import { addProduct } from '../../redux/operations';
 import { getProducts } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +25,6 @@ import uuid from 'react-native-uuid';
 export const ProductAddForm = () => {
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
-  const navigation = useNavigation();
 
   const [isInputFocused, setFocus] = useState(false);
 
@@ -59,105 +58,126 @@ export const ProductAddForm = () => {
     title: Yup.string()
       .required('Заповніть будь ласка')
       .min(2, 'Занадто коротке'),
-    price: Yup.number().positive().required('Заповніть будь ласка'),
+    price: Yup.number()
+      .positive()
+      .typeError('Должно быть число')
+      .required('Заповніть будь ласка'),
     description: Yup.string()
       .required('Заповніть будь ласка')
       .max(200, ({ max }) => `Повинно бути не більше ${max} символів`),
   });
 
   return (
-    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <ScrollView style={styles.container}>
-      <Formik
-        initialValues={{
-          title: '',
-          price: '',
-          description: '',
-        }}
-        validationSchema={productValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ handleChange, handleSubmit, values, errors }) => (
-          <View style={styles.form}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-            >
-              <View>
-                <TextInput
-                  name="title"
-                  onChangeText={handleChange('title')}
-                  value={values.title}
-                  placeholder="Назва товару"
-                  style={
-                    isInputFocused.input1
-                      ? styles.inputOnFocus
-                      : styles.inputOnBlur
-                  }
-                  onFocus={prev => {
-                    setFocus({ ...prev, input1: true });
-                  }}
-                  onBlur={prev => {
-                    setFocus({ ...prev, input1: false });
-                  }}
-                />
-                {errors.title &&(<Text style={styles.errorTxt}>{errors.title}</Text>)}
-              </View>
-              <View>
-              <TextInput
-                name="price"
-                onChangeText={handleChange('price')}
-                value={values.price}
-                placeholder="Ціна товару"
-                style={
-                  isInputFocused.input2
-                    ? styles.inputOnFocus
-                    : styles.inputOnBlur
-                }
-                onFocus={prev => {
-                  setFocus({ ...prev, input2: true });
-                }}
-                onBlur={prev => {
-                  setFocus({ ...prev, input2: false });
-                }}
-              />
-              {errors.price &&(<Text style={styles.errorTxt}>{errors.price}</Text>)}
-              </View>
-              <View>
-              <TextInput
-                name="description"
-                editable
-                multiline
-                maxLength={200}
-                onChangeText={handleChange('description')}
-                value={values.description}
-                placeholder="Опис товару"
-                style={
-                  isInputFocused.input3
-                    ? styles.inputOnFocusDescription
-                    : styles.inputOnBlurDescription
-                }
-                onFocus={prev => {
-                  setFocus({ ...prev, input3: true });
-                }}
-                onBlur={prev => {
-                  setFocus({ ...prev, input3: false });
-                }}
-              />
-              {errors.description &&(<Text style={styles.errorTxt}>{errors.description}</Text>)}
-              </View>
-            </KeyboardAvoidingView>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleSubmit}
-              title="Додати товар"
-            >
-              <Text style={styles.buttonText}> Додати товар</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
-    </ScrollView>
-    // </TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView style={styles.container}>
+        <Formik
+          initialValues={{
+            title: '',
+            price: '',
+            description: '',
+          }}
+          validateOnBlur
+          validationSchema={productValidationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            // isValid,
+            handleSubmit,
+            // dirty,
+          }) => (
+            <View style={styles.form}>
+              <KeyboardAvoidingView
+                behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+              >
+                <View>
+                  <TextInput
+                    name="title"
+                    onChangeText={handleChange('title')}
+                    value={values.title}
+                    placeholder="Назва товару"
+                    style={
+                      isInputFocused.input1
+                        ? styles.inputOnFocus
+                        : styles.inputOnBlur
+                    }
+                    onFocus={prev => {
+                      setFocus({ ...prev, input1: true });
+                    }}
+                    onBlur={prev => {
+                      handleBlur;
+                      setFocus({ ...prev, input1: false });
+                    }}
+                  />
+                  {touched.title && errors.title && (
+                    <Text style={styles.errorTxt}>{errors.title}</Text>
+                  )}
+                </View>
+                <View>
+                  <TextInput
+                    name="price"
+                    onChangeText={handleChange('price')}
+                    value={values.price}
+                    placeholder="Ціна товару"
+                    style={
+                      isInputFocused.input2
+                        ? styles.inputOnFocus
+                        : styles.inputOnBlur
+                    }
+                    onFocus={prev => {
+                      setFocus({ ...prev, input2: true });
+                    }}
+                    onBlur={prev => {
+                      handleBlur;
+                      setFocus({ ...prev, input2: false });
+                    }}
+                  />
+                  {touched.price && errors.price && (
+                    <Text style={styles.errorTxt}>{errors.price}</Text>
+                  )}
+                </View>
+                <View>
+                  <TextInput
+                    name="description"
+                    editable
+                    multiline
+                    maxLength={200}
+                    onChangeText={handleChange('description')}
+                    value={values.description}
+                    placeholder="Опис товару"
+                    style={
+                      isInputFocused.input3
+                        ? styles.inputOnFocusDescription
+                        : styles.inputOnBlurDescription
+                    }
+                    onFocus={prev => {
+                      setFocus({ ...prev, input3: true });
+                    }}
+                    onBlur={prev => {
+                      setFocus({ ...prev, input3: false });
+                    }}
+                  />
+                  {touched.description && errors.description && (
+                    <Text style={styles.errorTxt}>{errors.description}</Text>
+                  )}
+                </View>
+              </KeyboardAvoidingView>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={handleSubmit}
+                title="Додати товар"
+              >
+                <Text style={styles.buttonText}> Додати товар</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </Formik>
+      </ScrollView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -165,12 +185,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    // height: "100%",
     backgroundColor: '#FFF',
   },
-  errorTxt:{
+  errorTxt: {
     fontSize: 14,
-    color:"red",
+    color: 'red',
     marginTop: 5,
     marginLeft: 20,
   },
@@ -260,8 +279,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-    // alignItems: "center",
-
     backgroundColor: '#FF6C00',
     width: 200,
     height: 51,

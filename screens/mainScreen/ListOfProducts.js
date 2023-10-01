@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet,
-  View,
-  Text,
   FlatList,
   SafeAreaView,
-  Image,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { getProducts } from '../../redux/selectors';
 
 import * as Icon from 'react-native-feather';
@@ -22,17 +18,8 @@ export const ListOfProducts = React.memo(() => {
 
   const products = useSelector(getProducts);
 
-  console.log(products);
-
   return (
     <SafeAreaView style={styles.container}>
-      {/* <TouchableOpacity
-        title="Додати товар"
-        style={styles.button}
-        onPress={() => navigation.navigate('ProductAdd')}
-      >
-        <Text style={styles.buttonText}> Додати товар</Text>
-      </TouchableOpacity> */}
       <FlatList
         data={products}
         renderItem={({ item }) => (
@@ -45,16 +32,13 @@ export const ListOfProducts = React.memo(() => {
         )}
         keyExtractor={item => item.id}
       />
-      {/* <View style={{position: "absolute",}}> */}
       <TouchableOpacity
         title="Додати товар"
         style={styles.button}
         onPress={() => navigation.navigate('ProductAdd')}
       >
-        {/* <Text style={styles.buttonText}> Додати товар</Text> */}
         <Icon.Plus width={32} height={32} color="#FFF" />
       </TouchableOpacity>
-      {/* </View> */}
     </SafeAreaView>
   );
 });

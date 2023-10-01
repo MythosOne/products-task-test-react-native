@@ -19,7 +19,6 @@ export const ProductDetails = () => {
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
-          // flexDirection: 'column',
           padding: 10
         }}
       >
