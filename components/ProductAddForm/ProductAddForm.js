@@ -13,9 +13,7 @@ import {
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-// import { useNavigation } from '@react-navigation/native';
 
-// import { addProduct } from '../../redux/operations';
 import { getProducts } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -86,9 +84,7 @@ export const ProductAddForm = () => {
             touched,
             handleChange,
             handleBlur,
-            // isValid,
             handleSubmit,
-            // dirty,
           }) => (
             <View style={styles.form}>
               <KeyboardAvoidingView

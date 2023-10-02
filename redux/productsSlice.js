@@ -10,7 +10,7 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/products/?limit=8');
+      const response = await axios.get('/products/?limit=18');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -37,7 +37,7 @@ export const fetchProducts = createAsyncThunk(
 //     },
 //   },
 // });
-
+// ----------------------------------------------------------------
 // export const productsSlice = createSlice({
 //   name: 'products',
 //   initialState: {

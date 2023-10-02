@@ -10,16 +10,17 @@ export const ProductDetails = () => {
   return (
     <View style={styles.container}>
       <View style={styles.image}>
-        <Image source={{ uri: image }} style={{ width: 340, height: 340 }} />
+        <Image source={{ uri: image }} resizeMode="contain" style={{ minWidth: 320, minHeight: 320 }} />
       </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.price}>Price $: {price}</Text>
       <ScrollView
-        style={{ width: '100%'}}
+        style={{ width: '100%' }}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
-          padding: 10
+          alignItems: 'center',
+          padding: 10,
         }}
       >
         <Text style={styles.description}>
@@ -40,14 +41,17 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 20,
+    padding: 5,
 
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 6,
     borderColor: '#FF6C00',
     backgroundSize: 'cover',
   },
   title: {
     marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
     color: '#767676',
     textAlign: 'center',
     fontSize: 22,
@@ -59,8 +63,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   description: {
+    flexGrow: 1,
+
     width: '90%',
     marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
     textAlign: 'center',
     color: '#767676',
     fontSize: 18,

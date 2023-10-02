@@ -14,6 +14,7 @@ export const ProductCard = ({ image, title, price, description }) => {
       <View style={styles.item}>
         <Image
           source={{ uri: image }}
+          resizeMode="contain"
           style={{
             width: 280,
             height: 240,
@@ -36,9 +37,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'none',
     // elevation: 5,
 
-    // maxWidth: "90%",
-    // minWidth: 340,
-    // height: 140,
     backgroundColor: '#fff',
 
     borderColor: '#FF6C00',

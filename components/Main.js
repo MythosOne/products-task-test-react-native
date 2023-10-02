@@ -19,7 +19,7 @@ export const Main = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  },[dispatch]);
+  }, [dispatch]);
 
   return (
     <NavigationContainer>
@@ -30,9 +30,6 @@ export const Main = () => {
           options={{
             title: 'Список Товарів',
             headerTintColor: '#FF6C00',
-            // headerTitleStyle: {
-            //   marginRight: 109,
-            // },
           }}
         />
         <MainStack.Screen

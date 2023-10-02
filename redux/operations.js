@@ -15,14 +15,14 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-export const addProduct = createAsyncThunk(
-  'products/addProducts',
-  async (newProduct, thunkAPI) => {
-    try {
-      const response = await axios.post('/products', newProduct);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
+// export const addProduct = createAsyncThunk(
+//   'products/addProducts',
+//   async (newProduct, thunkAPI) => {
+//     try {
+//       const response = await axios.post('/products', newProduct);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );

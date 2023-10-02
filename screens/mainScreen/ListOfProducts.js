@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   FlatList,
-  SafeAreaView,
+  View,
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +19,7 @@ export const ListOfProducts = React.memo(() => {
   const products = useSelector(getProducts);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={products}
         renderItem={({ item }) => (
@@ -39,7 +39,7 @@ export const ListOfProducts = React.memo(() => {
       >
         <Icon.Plus width={32} height={32} color="#FFF" />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 });
 
@@ -49,9 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     alignItems: 'center',
     justifyContent: 'center',
-
-    width: '100%',
-    height: '100%',
   },
   button: {
     position: 'absolute',
