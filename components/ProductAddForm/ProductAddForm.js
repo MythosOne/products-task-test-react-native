@@ -50,7 +50,7 @@ export const ProductAddForm = () => {
     resetForm();
   };
 
-  console.log(products);
+  // console.log(products);
 
   const productValidationSchema = Yup.object().shape({
     title: Yup.string()

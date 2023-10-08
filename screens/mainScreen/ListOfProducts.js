@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect}from 'react';
 import {
   StyleSheet,
   FlatList,
@@ -8,14 +8,14 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { getProducts } from '../../redux/selectors';
 
 import * as Icon from 'react-native-feather';
 
 export const ListOfProducts = React.memo(() => {
   const navigation = useNavigation();
-
+  
   const products = useSelector(getProducts);
 
   return (

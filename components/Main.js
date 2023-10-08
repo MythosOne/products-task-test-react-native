@@ -7,7 +7,7 @@ import { ListOfProducts } from '../screens/mainScreen/ListOfProducts';
 import { ProductAdd } from '../screens/nestedScreen/ProductAdd';
 import { ProductDetails } from '../screens/nestedScreen/ProductDetails';
 
-import { fetchProducts } from '../redux/productsSlice';
+import { fetchProducts } from '../redux/operations';
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
