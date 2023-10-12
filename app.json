@@ -19,13 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptive-shop.png",
         "backgroundColor": "#ffffff"
       },
-      // "softwareKeyboardLayoutMode": "pan" 
+      "package": "com.mythos_one.productstasktestreactnative"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cb4c64f9-2bc6-4363-a1d9-88e853861396"
+      }
     }
   }
 }
