@@ -1,4 +1,4 @@
-Tweets-task-tester.
+Products-task-test-react-native.
 
 Frontend:
 1. React, StyleSheet
