@@ -4,7 +4,7 @@
     "slug": "products-task-test-react-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/purchases-image.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
